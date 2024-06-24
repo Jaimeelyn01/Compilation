@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stock Search</title>
+</head>
+<body>
+    <p>Stocks: <span id="stocks-heart-print-jeans">20</span></p>
+    <input type="text" id="search-input" placeholder="Search...">
+    <div id="stock-info"></div>
+    <a href="store.html" class="button">Back to Main Page</a>
+
+    <script>
+        // Define stocks object with initial stock quantities
+        let stocks = {
+            "Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut": 15,
+            "Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853": 15,
+            "Guys Flap Pocket Ripped Jeans": 15,
+            "Women's sexy crop top fashion nike round neck tees tops": 15,
+            "Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061": 15,
+            "Simple casual plain Vneck tshirt for women and men white": 15,
+            "Kelly T-Shirt Body Hugging Full Length Top Double Lining": 15,
+            "New women's tops stretchable fit (M to 2XL)": 15,
+            "POISON for men 100 ml perfume ": 15,
+            "Versace Eros Flame Perfume for Men and Women 50ML": 15,
+            "V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume": 15,
+            "Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML": 15,
+            "Women's perfume Girl student perfume lasting fragrance 30ml": 15,
+            "Plain Sando with Different Color for Men (Oversized)": 15,
+            "Klay - Korean Knitted Sando Tank Top": 15,
+            "4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY": 15,
+            "KC Fly Emirates Sando For Men Fits M~XXL": 15,
+            "EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ": 15
+        };
+
+        const searchInput = document.getElementById('search-input');
+        const stockInfo = document.getElementById('stock-info');
+
+        searchInput.addEventListener('input', filterStock); // Call filterStock function when input changes
+
+        // Function to update stock quantity and reflect changes in localStorage
+        function updateStock(item, quantity) {
+            if (stocks[item] + quantity >= 0) { // Ensure stock doesn't go negative
+                stocks[item] = (stocks[item] || 0) + quantity;
+                updateLocalStorageStock();
+                filterStock(); // Update stock display by filtering again
+                alert('Stocks updated successfully!');
+            }
+        }
+
+        // Function to update localStorage with the current stocks data
+        function updateLocalStorageStock() {
+            localStorage.setItem('stocks', JSON.stringify(stocks));
+        }
+
+        // Function to filter stock items based on search input
+        function filterStock() {
+            const searchTerm = searchInput.value.trim().toLowerCase(); // Convert search term to lowercase
+
+            const filteredStocks = Object.keys(stocks).filter(item => item.toLowerCase().includes(searchTerm));
+
+            const stockInfo = document.getElementById('stock-info');
+            stockInfo.innerHTML = ''; // Clear previous content
+
+            const ul = document.createElement('ul');
+
+            filteredStocks.forEach(item => {
+                const li = document.createElement('li');
+                li.textContent = `${item}: ${stocks[item]} in stock`;
+
+                const addBtn = document.createElement('button');
+                addBtn.textContent = '+';
+                addBtn.classList.add('stock-btn');
+                addBtn.onclick = () => updateStock(item, 1); // Update stock quantity by 1
+                li.appendChild(addBtn);
+
+                const subtractBtn = document.createElement('button');
+                subtractBtn.textContent = '-';
+                subtractBtn.classList.add('stock-btn');
+                subtractBtn.onclick = () => updateStock(item, -1); // Update stock quantity by -1
+                li.appendChild(subtractBtn);
+
+                ul.appendChild(li);
+            });
+
+            stockInfo.appendChild(ul);
+        }
+
+        // Display all stock items initially
+        filterStock();
+
+        // Function to navigate back to the main page
+        function goToMainPage() {
+            window.location.href = "main.html"; // Replace "main.html" with your main page URL
+        }
+    </script>
+</body>
+</html>

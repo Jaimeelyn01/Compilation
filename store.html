@@ -1,0 +1,552 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sari-Sari Store</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #FFC470;
+        color: #333;
+        padding: 20px;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        position: relative;
+    }
+    .price-list-button {
+        margin-right: 10px; /* Adjust margin as needed */
+        padding: 5px 10px;
+        background-color: #841818;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .logo {
+        max-width: 150px;
+        margin-bottom: 20px;
+        display: inline-block;
+        vertical-align: middle;
+    }
+    .store-name {
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 10px;
+        font-size: 30px;
+        font-family: 'Comic Sans MS', cursive;
+    }
+
+    .item-container {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 20px;
+    }
+    .item {
+        border: 5px solid #841818;
+        border-radius: 5px;
+        padding: 5px;
+        text-align: center;
+        background-color: #FFF8DC;
+        width: 200px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .item img {
+        max-width: 2in;
+        max-height: 4in;
+        margin-bottom: 5px;
+    }
+    .cart {
+        position: absolute;
+        top: 20px;
+        right: calc(10px + 1in);
+        text-align: right;
+    }
+    .cart-button, .price-list-button {
+        padding: 5px 10px;
+        background-color: #841818;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    .receipt {
+        position: absolute;
+        top: 1px;
+        right: 20px;
+        margin-top: 20px; 
+    }
+    button {
+        margin-top: 10px;
+        padding: 5px 10px;
+        background-color: #841818;
+        color: #fff;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    hr {
+        border: none;
+        border-top: 20px solid black; /* Changed to black */
+        margin: 20px 0; /* Added margin for spacing */
+   }
+   .notification {
+        position: fixed;
+        top: 100px;
+        right: 100px;
+        background-color: #FFF8DC;
+        border: 5px solid #841818;
+        border-radius: 5px;
+        padding: 10px;
+        display: none;
+        .price-list-container {
+        max-height: 300px;
+        overflow-y: auto;
+    }
+    }
+    .btn.back-btn {
+    font-size: 12px; /* Adjust the font size */
+    padding: 4px 5px; /* Adjust padding to make it smaller */
+    display: inline-flex; /* Align icon and text properly */
+    align-items: center;
+    text-decoration: none; /* Remove underline */
+    border-radius: 30px; /* Optional: Add border radius for rounded corners */
+    background-color: rgba(0, 0, 0, 0); /* Transparent background color */
+}
+
+.btn.back-btn img {
+    width: 70px; /* Set the width of the image to 20px */
+    height: auto; /* Maintain aspect ratio */
+    margin-right: 30px; /* Add space between icon and text */
+}
+</style>
+</head>
+<body>
+    <a href="index.html" class="btn back-btn"><img src="a.png" alt="Back Icon"></a>
+<div class="container">
+    <img src="Logos.png" alt="Sari-Sari Store Logo" class="logo">
+    <span class="store-name">Sari's & More</span>
+    <div class="search-container">
+        <input type="text" class="search-input" placeholder="Search categories..." id="searchInput">
+        <button onclick="searchCategory()">Search</button>
+    </div>
+    <h2 style="font-family: 'Arial', sans-serif; font-size: 50px;">JEANS</h2>
+    <div class="item-container">
+        <div class="item" id="Cream High Waist Wide">
+            <img src="1.jpg" alt="Item 1">
+            <h3>1.Cream High Waist Wide</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Cream High Waist Wide">20</span></p>
+            <button onclick="addToCart('Cream High Waist Wide')">Add to Cart</button>
+            <button onclick="deductFromCart('Cream High Waist Wide')">Deduct from Cart</button>
+            <button onclick="addStocks('Cream High Waist Wide')">Add Stocks</button>
+        </div>
+        
+        <div class="item" id="Mens cotton patch detail ripped straight leg jeans">
+            <img src="2.jpg" alt="Item 2">
+            <h3>2.Mens cotton patch detail ripped straight leg jeans</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Mens cotton patch detail ripped straight leg jeans">15</span></p>
+            <button onclick="addToCart('Mens cotton patch detail ripped straight leg jeans')">Add to Cart</button>
+            <button onclick="deductFromCart('Mens cotton patch detail ripped straight leg jeans')">Deduct from Cart</button>
+            <button onclick="addStocks('Mens cotton patch detail ripped straight leg jeans')">Add Stocks</button>
+        </div>
+        
+        <div class="item" id="Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut">
+            <img src="3.jpg" alt="Item 3">
+            <h3>3.Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut">15</span></p>
+            <button onclick="addToCart('Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut')">Add to Cart</button>
+            <button onclick="deductFromCart('Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut')">Deduct from Cart</button>
+            <button onclick="addStocks('Heart Print Jeans Women High Waist Straight Tube Wideleg Straight Cut')">Add Stocks</button>
+        </div>
+        <div class="item" id="Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853">
+            <img src="4.jpg" alt="Item 4">
+            <h3>4.Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853">15</span></p>
+            <button onclick="addToCart('Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853')">Add to Cart</button>
+            <button onclick="deductFromCart('Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853')">Deduct from Cart</button>
+            <button onclick="addStocks('Black High Waist Wide Leg Mom Jeans Boyfriend Style Pants G1853')">Add Stocks</button>
+        </div>
+        <div class="item" id="Guys Flap Pocket Ripped Jeans">
+            <img src="5.jpg" alt="Item 5">
+            <h3>5.Guys Flap Pocket Ripped Jeans</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Guys Flap Pocket Ripped Jeans">15</span></p>
+            <button onclick="addToCart('Guys Flap Pocket Ripped Jeans')">Add to Cart</button>
+            <button onclick="deductFromCart('Guys Flap Pocket Ripped Jeans')">Deduct from Cart</button>
+            <button onclick="addStocks('Guys Flap Pocket Ripped Jeans')">Add Stocks</button>
+        </div>
+    </div>
+    <hr>
+ <h2 style="font-family: 'Arial', sans-serif; font-size: 50px;">T-SHIRT</h2>
+    <div class="item-container">
+        <div class="item" id="Women's sexy crop top fashion nike round neck tees tops">
+            <img src="6.jpg" alt="Item 6">
+            <h3><strong>6.Women's sexy crop top fashion nike round neck tees tops</strong></h3>
+             <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Womens sexy crop top fashion nike round neck tees tops">15</span></p>
+            <button onclick="addToCart('Womens sexy crop top fashion nike round neck tees tops')">Add to Cart</button>
+            <button onclick="deductFromCart('Womens sexy crop top fashion nike round neck tees tops')">Deduct from Cart</button>
+            <button onclick="addStocks('Womens sexy crop top fashion nike round neck tees tops')">Add Stocks</button>
+        </div>
+        <div class="item" id="Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061">
+            <img src="7.jpg" alt="Item 7">
+            <h3>7.Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061">15</span></p>
+            <button onclick="addToCart('Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061')">Add to Cart</button>
+            <button onclick="deductFromCart('Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061')">Deduct from Cart</button>
+            <button onclick="addStocks('Unisex women men oversized folded shirt tee classic design casual minimalist solid color b061')">Add Stocks</button>
+        </div>
+        <div class="item" id="Simple casual plain Vneck tshirt for women and men white">
+            <img src="8.jpg" alt="Item 13">
+            <h3>8.Simple casual plain Vneck tshirt for women and men white</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Simple casual plain Vneck tshirt for women and men white">15</span></p>
+            <button onclick="addToCart('Simple casual plain Vneck tshirt for women and men white')">Add to Cart</button>
+            <button onclick="deductFromCart('Simple casual plain Vneck tshirt for women and men white')">Deduct from Cart</button>
+            <button onclick="addStocks('Simple casual plain Vneck tshirt for women and men white')">Add Stocks</button>
+        </div>
+        <div class="item" id="Kelly T-Shirt Body Hugging Full Length Top Double Lining">
+            <img src="9.jpg" alt="Item 9">
+            <h3>9.Kelly T-Shirt Body Hugging Full Length Top Double Lining</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Kelly T-Shirt Body Hugging Full Length Top Double Lining">15</span></p>
+            <button onclick="addToCart('Kelly T-Shirt Body Hugging Full Length Top Double Lining')">Add to Cart</button>
+            <button onclick="deductFromCart('Kelly T-Shirt Body Hugging Full Length Top Double Lining')">Deduct from Cart</button>
+            <button onclick="addStocks('Kelly T-Shirt Body Hugging Full Length Top Double Lining')">Add Stocks</button>
+        </div>
+        <div class="item" id="New women's tops stretchable fit (M to 2XL)">
+            <img src="10.jpg" alt="Item 10">
+            <h3>10.New women's tops stretchable fit (M to 2XL)</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-New womens tops stretchable fit M to 2XL">15</span></p>
+            <button onclick="addToCart('New womens tops stretchable fit M to 2XL')">Add to Cart</button>
+            <button onclick="deductFromCart('New womens tops stretchable fit M to 2XL')">Deduct from Cart</button>
+            <button onclick="addStocks('New womens tops stretchable fit M to 2XL')">Add Stocks</button>
+        </div>
+    </div>
+    <hr>
+    <h2 style="font-family: 'Arial', sans-serif; font-size: 50px;">PERFUME</h2>
+    <div class="item-container">
+        <div class="item" id="POISON for men 100 ml perfume ">
+            <img src="11.jpg" alt="Item 11">
+            <h3><strong>11. POISON for men 100 ml perfume </strong></h3>
+             <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-POISON for men 100 ml perfume ">15</span></p>
+            <button onclick="addToCart('POISON for men 100 ml perfume ')">Add to Cart</button>
+            <button onclick="deductFromCart('POISON for men 100 ml perfume ')">Deduct from Cart</button>
+            <button onclick="addStocks('POISON for men 100 ml perfume ')">Add Stocks</button>
+        </div>
+        <div class="item" id="Versace Eros Flame Perfume for Men and Women 50ML">
+            <img src="12.jpg" alt="Item 12">
+            <h3>12.Versace Eros Flame Perfume for Men and Women 50ML</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Versace Eros Flame Perfume for Men and Women 50ML">15</span></p>
+            <button onclick="addToCart('Versace Eros Flame Perfume for Men and Women 50ML')">Add to Cart</button>
+            <button onclick="deductFromCart('Versace Eros Flame Perfume for Men and Women 50ML')">Deduct from Cart</button>
+            <button onclick="addStocks('Versace Eros Flame Perfume for Men and Women 50ML')">Add Stocks</button>
+        </div>
+        <div class="item" id="V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume">
+            <img src="13.jpg" alt="Item 13">
+            <h3>13. V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume">15</span></p>
+            <button onclick="addToCart('V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume')">Add to Cart</button>
+            <button onclick="deductFromCart('V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume')">Deduct from Cart</button>
+            <button onclick="addStocks('V.LOVE 250ml Cappuccino Coffee Refreshing Long Lasting Fragrance Mist Unisex Perfume')">Add Stocks</button>
+        </div>
+        <div class="item" id="item14">
+            <img src="14.jpg" alt="Item 14">
+            <h3>14.Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML">15</span></p>
+            <button onclick="addToCart('Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML')">Add to Cart</button>
+            <button onclick="deductFromCart('Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML')">Deduct from Cart</button>
+            <button onclick="addStocks('Penshoppe Days Like This Pink Floral Fruity Scent Body Mist - Perfume For Women 100ML')">Add Stocks</button>
+        </div>
+        <div class="item" id="Women's perfume Girl student perfume lasting fragrance 30ml">
+            <img src="15.jpg" alt="Item 15">
+            <h3>15.Women's perfume Girl student perfume lasting fragrance 30ml</h3>
+            <p>Price: 150</p>
+            <p>Stocks: <span id="stocks-Womens perfume Girl student perfume lasting fragrance 30ml">15</span></p>
+            <button onclick="addToCart('Womens perfume Girl student perfume lasting fragrance 30ml')">Add to Cart</button>
+            <button onclick="deductFromCart('Womens perfume Girl student perfume lasting fragrance 30ml')">Deduct from Cart</button>
+            <button onclick="addStocks('Womens perfume Girl student perfume lasting fragrance 30ml')">Add Stocks</button>
+        </div>
+    </div>
+    <hr>
+    <h2 style="font-family: 'Arial', sans-serif; font-size: 50px;">SANDO</h2>
+    <div class="item-container">
+    <div class="item" id="Plain Sando with Different Color for Men (Oversized)">
+        <img src="16.jpg" alt="Item 16">
+        <h3><strong>16. Plain Sando with Different Color for Men (Oversized) </strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-Plain Sando with Different Color for Men (Oversized)">15</span></p>
+        <button onclick="addToCart('Plain Sando with Different Color for Men (Oversized)')">Add to Cart</button>
+        <button onclick="deductFromCart('Plain Sando with Different Color for Men (Oversized)')">Deduct from Cart</button>
+        <button onclick="addStocks('Plain Sando with Different Color for Men (Oversized)')">Add Stocks</button>
+    </div>
+    <div class="item" id="Klay - Korean Knitted Sando Tank Top">
+        <img src="17.jpg" alt="Item 17">
+        <h3><strong>17. Klay - Korean Knitted Sando Tank Top </strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-Klay - Korean Knitted Sando Tank Top">15</span></p>
+        <button onclick="addToCart('Klay - Korean Knitted Sando Tank Top')">Add to Cart</button>
+        <button onclick="deductFromCart('Klay - Korean Knitted Sando Tank Top')">Deduct from Cart</button>
+        <button onclick="addStocks('Klay - Korean Knitted Sando Tank Top')">Add Stocks</button>
+    </div>
+    <div class="item" id="4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY">
+        <img src="18.jpg" alt="Item 18">
+        <h3><strong>18. 4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY </strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY">15</span></p>
+        <button onclick="addToCart('4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY')">Add to Cart</button>
+        <button onclick="deductFromCart('4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY')">Deduct from Cart</button>
+        <button onclick="addStocks('4 PCS ASSORTED COLOR SANDO STRIPES FOR MEN, FIT UP TO LARGE FRAME, HIGH QUALITY')">Add Stocks</button>
+    </div>
+    <div class="item" id="KC Fly Emirates Sando For Men Fits M~XXL">
+        <img src="19.jpg" alt="Item 19">
+        <h3><strong>19. KC Fly Emirates Sando For Men Fits M~XXL</strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-KC Fly Emirates Sando For Men Fits M~XXL">15</span></p>
+        <button onclick="addToCart('KC Fly Emirates Sando For Men Fits M~XXL')">Add to Cart</button>
+        <button onclick="deductFromCart('KC Fly Emirates Sando For Men Fits M~XXL')">Deduct from Cart</button>
+        <button onclick="addStocks('KC Fly Emirates Sando For Men Fits M~XXL')">Add Stocks</button>
+    </div>
+    <div class="item" id="EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ">
+        <img src="20.jpg" alt="Item 20">
+        <h3><strong>20.EMILY SQUARENECK DOUBLE LINING Full Length Sando Top </strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ">15</span></p>
+        <button onclick="addToCart('EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ')">Add to Cart</button>
+        <button onclick="deductFromCart('EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ')">Deduct from Cart</button>
+        <button onclick="addStocks('EMILY SQUARENECK DOUBLE LINING Full Length Sando Top ')">Add Stocks</button>
+    </div>
+</div>
+<hr>
+<h2 style="font-family: 'Arial', sans-serif; font-size: 50px;">TOYS</h2>
+    <div class="item-container">
+    <div class="item" id="Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit">
+        <img src="21.jpg" alt="Item 21">
+        <h3><strong>21.Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit</strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit">15</span></p>
+        <button onclick="addToCart('Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit')">Add to Cart</button>
+        <button onclick="deductFromCart('Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit')">Deduct from Cart</button>
+        <button onclick="addStocks('Fast Push Game Toy Pop it Game Quick Speed Push Toys Stress Relief Toys Fast Push popit')">Add Stocks</button>
+    </div>
+    <div class="item" id="Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys ">
+        <img src="22.jpg" alt="Item 22">
+        <h3><strong>22.Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys </strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys ">15</span></p>
+        <button onclick="addToCart('Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys ')">Add to Cart</button>
+        <button onclick="deductFromCart('Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys ')">Deduct from Cart</button>
+        <button onclick="addStocks('Slime Fluffy Floam Kids Modeling Clay Toys Polymer Safe Cotton Biscuit Slime AntiStress Gift for Girls/Boys ')">Add Stocks</button>
+    </div>
+    <div class="item" id="New viral trending toy for kids 3cm small ball latto">
+        <img src="23.jpg" alt="Item 23">
+        <h3><strong>23. New viral trending toy for kids 3cm small ball latto</strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-New viral trending toy for kids 3cm small ball latto">15</span></p>
+        <button onclick="addToCart('New viral trending toy for kids 3cm small ball latto')">Add to Cart</button>
+        <button onclick="deductFromCart('New viral trending toy for kids 3cm small ball latto')">Deduct from Cart</button>
+        <button onclick="addStocks('New viral trending toy for kids 3cm small ball latto')">Add Stocks</button>
+    </div>
+    <div class="item" id="Lucky 7inch pawpatrol stuff toy paw patrol plushies">
+        <img src="24.jpg" alt="Item 24">
+        <h3><strong>24.Lucky 7inch pawpatrol stuff toy paw patrol plushies</strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-Lucky 7inch pawpatrol stuff toy paw patrol plushies">15</span></p>
+        <button onclick="addToCart('Lucky 7inch pawpatrol stuff toy paw patrol plushies')">Add to Cart</button>
+        <button onclick="deductFromCart('Lucky 7inch pawpatrol stuff toy paw patrol plushies')">Deduct from Cart</button>
+        <button onclick="addStocks('Lucky 7inch pawpatrol stuff toy paw patrol plushies')">Add Stocks</button>
+    </div>
+    <div class="item" id="BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble">
+        <img src="25.jpg" alt="Item 25">
+        <h3><strong>25.BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble</strong></h3>
+         <p>Price: 150</p>
+        <p>Stocks: <span id="stocks-BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble">15</span></p>
+        <button onclick="addToCart('BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble')">Add to Cart</button>
+        <button onclick="deductFromCart('BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble')">Deduct from Cart</button>
+        <button onclick="addStocks('BubbleGun for Kids Adults Outdoor Party Favors 25Hole Bubble')">Add Stocks</button>
+    </div>
+</div>
+<hr>
+    <div class="cart">
+        <button class="price-list-button" onclick="showPriceList()">Price List</button>
+        <button class="cart-button" onclick="viewCart()">View Cart</button>
+        <a href="ViewStock.html" class="show-stock-button" onclick="showAllStock()"><button type="button">View Stock</button>
+          </a>
+          
+    </div>
+    <div class="receipt">
+        <button onclick="showReceipt()">Receipt</button>
+    </div>
+    <div class="notification" id="priceListDisplay"></div>
+    </div>
+    <script>
+    function searchCategory() {
+        let searchInput = document.getElementById('searchInput').value.toLowerCase();
+        let categories = document.querySelectorAll('h2');
+        let found = false;
+
+        categories.forEach((category) => {
+            let categoryName = category.innerText.toLowerCase();
+            if (categoryName.includes(searchInput)) {
+                found = true;
+                category.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        });
+
+        if (!found) {
+            alert('Category not found!');
+        }
+    }
+    let cart = {};
+    let totalItems = 0;
+    let totalPrice = 0;
+
+    function addToCart(item) {
+        let stocks = document.getElementById(`stocks-${item}`);
+        let itemStocks = parseInt(stocks.innerText);
+        if (itemStocks > 0) {
+            if (cart[item]) {
+                cart[item]++;
+            } else {
+                cart[item] = 1;
+            }
+            stocks.innerText = itemStocks - 1;
+            totalItems++;
+            totalPrice += 150; // Assuming each item price is 150, you can adjust this accordingly
+            alert('Item added to cart!');
+        } else {
+            alert('No stocks available for this item!');
+        }
+    }
+
+    function showPriceList() {
+        let priceList = '<h2>Price List:</h2>';
+        priceList += '<div class="price-list-container">'; // Adding container for scrollbar
+        priceList += '<table>';
+        priceList += '<tr><th>Item Name</th><th>Price</th></tr>';
+
+        // Loop through each item in the item-container
+        let items = document.querySelectorAll('.item');
+        items.forEach((item, index) => {
+            let itemName = item.querySelector('h3').innerText;
+            priceList += generatePriceListItem(itemName, '₱150'); // Assuming each item price is 150, you can adjust this accordingly
+        });
+
+        priceList += '</table>';
+        priceList += '</div>'; // Closing container for scrollbar
+
+        // Display the price list
+        let notification = document.getElementById('priceListDisplay');
+        notification.innerHTML = priceList;
+        notification.style.display = "block";
+        // Add a button to go back to normal
+        notification.innerHTML += '<button onclick="hidePriceList()">OK</button>';
+    }
+
+    function generatePriceListItem(name, price) {
+        return `<tr><td>${name}</td><td>${price}</td></tr>`;
+    }
+
+    function hidePriceList() {
+        document.getElementById('priceListDisplay').style.display = "none";
+    }
+
+    function deductFromCart(item) {
+        if (cart[item] && cart[item] > 0) {
+            let stocks = document.getElementById(`stocks-${item}`);
+            let itemStocks = parseInt(stocks.innerText);
+            stocks.innerText = itemStocks + 1;
+            cart[item]--;
+            totalItems--;
+            totalPrice -= 150; // Assuming each item price is 150, you can adjust this accordingly
+            alert('Item deducted from cart!');
+        } else {
+            alert('No item in cart to deduct!');
+        }
+    }
+
+    function addStocks(item) {
+            let stocks = JSON.parse(localStorage.getItem('stocks')) || {};
+            stocks[item] = (stocks[item] || 0) + 1;
+            localStorage.setItem('stocks', JSON.stringify(stocks));
+            alert('Stocks added successfully!');
+    }
+    function viewCart() {
+        let cartContent = '';
+        for (let item in cart) {
+            cartContent += `${item}: ${cart[item]} item(s)\n`;
+        }
+        if (cartContent === '') {
+            alert('Cart is empty!');
+        } else {
+            alert('Cart Content:\n' + cartContent);
+        }
+    }
+
+    function showReceipt() {
+    const now = new Date();
+    const dateTimeString = now.toLocaleString();
+    const payment = parseFloat(prompt('Enter payment amount:'));
+    let discountedPrice = totalPrice; // Initialize discounted price with the original total price
+    let discountType = ''; // Initialize discount type
+
+    const discountTypeInput = prompt('Enter discount type (senior/student/pwd):').toLowerCase(); // Prompt user for discount type
+
+    // Check for selected discount type
+    switch (discountTypeInput) {
+        case 'senior':
+            discountedPrice *= 0.80; // Apply 20% discount for seniors
+            discountType = 'Senior Discount (20%)';
+            break;
+        case 'student':
+            discountedPrice *= 0.90; // Apply 10% discount for students
+            discountType = 'Student Discount (10%)';
+            break;
+        case 'pwd':
+            discountedPrice *= 0.70; // Apply 30% discount for PWD
+            discountType = 'PWD Discount (30%)';
+            break;
+        default:
+            alert('Invalid discount type!');
+            return; // Exit the function if discount type is invalid
+    }
+
+    if (isNaN(payment) || payment < discountedPrice) {
+        alert('Invalid payment amount or not enough!');
+    } else {
+        const change = payment - discountedPrice; // Calculate the change correctly
+        const receipt = `Receipt
+Date: ${dateTimeString}
+Total Items: ${totalItems}
+Total Price: ₱${totalPrice}
+Discount Type: ${discountType}
+Discounted Price: ₱${discountedPrice.toFixed(2)} (after discount)
+Payment: ₱${payment}
+Change: ₱${change.toFixed(2)}`; // Use the correct change value
+
+        alert(receipt);
+        alert('Ordered Successfully');
+    }
+}
+
+
+
+</script>
+</body>
+</html>
